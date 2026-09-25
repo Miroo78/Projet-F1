@@ -85,9 +85,51 @@ public class Classement {
     // 3. classementEcuries(pilotes) : additionne les points, victoires et
     //    2e places des pilotes de chaque écurie. Même ordre de tri.
     public static List<Resultat> classementEcuries(List<Resultat> pilotes) {
-        // À COMPLÉTER
-        return null;
+    List<Resultat> ecuries = new java.util.ArrayList<>();
+
+    for (Resultat pilote : pilotes) {
+
+        Resultat ecurie = null;
+
+        // On cherche si l'écurie existe déjà
+        for (Resultat r : ecuries) {
+            if (r.nom.equals(pilote.ecurie)) {
+                ecurie = r;
+                break;
+            }
+        }
+
+        // Si l'écurie n'existe pas encore, on la crée
+        if (ecurie == null) {
+            ecurie = new Resultat(pilote.ecurie, "");
+            ecuries.add(ecurie);
+        }
+
+        // Addition des résultats des pilotes
+        ecurie.points += pilote.points;
+        ecurie.victoires += pilote.victoires;
+        ecurie.deuxiemes += pilote.deuxiemes;
     }
+
+    // Tri : points → victoires → 2e places → nom
+    ecuries.sort((a, b) -> {
+        if (a.points != b.points) {
+            return Integer.compare(b.points, a.points);
+        }
+
+        if (a.victoires != b.victoires) {
+            return Integer.compare(b.victoires, a.victoires);
+        }
+
+        if (a.deuxiemes != b.deuxiemes) {
+            return Integer.compare(b.deuxiemes, a.deuxiemes);
+        }
+
+        return a.nom.compareTo(b.nom);
+    });
+
+    return ecuries;
+}
 
     // 4. positionMoyenne(lignes, pilote) : moyenne des positions de ce pilote,
     //    ABANDONS EXCLUS, arrondie à 2 décimales. 0 s'il n'a jamais terminé.
