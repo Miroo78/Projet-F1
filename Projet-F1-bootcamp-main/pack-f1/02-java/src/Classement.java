@@ -135,7 +135,21 @@ public class Classement {
     //    ABANDONS EXCLUS, arrondie à 2 décimales. 0 s'il n'a jamais terminé.
     //    Ex. positions 1, 2 et un abandon -> 1.5
     public static double positionMoyenne(List<Ligne> lignes, String pilote) {
-        // À COMPLÉTER
+    double total = 0;
+    int nombreCourses = 0;
+
+    for (Ligne ligne : lignes) {
+
+        if (ligne.pilote().equals(pilote) && ligne.position() != 0) {
+            total += ligne.position();
+            nombreCourses++;
+        }
+    }
+
+    if (nombreCourses == 0) {
         return 0;
     }
+
+    return Math.round((total / nombreCourses) * 100.0) / 100.0;
+}
 }
