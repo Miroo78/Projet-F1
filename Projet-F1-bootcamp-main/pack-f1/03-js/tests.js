@@ -87,9 +87,9 @@ test("5. saison complète (donnees.js)", () => {
        "donnees.js est absent : le maillon Java a-t-il produit le fichier ?");
   egal(PILOTES.length, 10);
   const trie = trierParPoints(PILOTES);
-  egal(trie[0].nom, "AMIR B ");
+  egal(trie[0].nom, "VERSTAPPEN");
   egal(trie[0].points, 101);
-  egal(trie.map((p) => p.nom).slice(0, 3), ["AMIR B ", "LECLERC", "NORRIS"]);
+  egal(trie.map((p) => p.nom).slice(0, 3), ["VERSTAPPEN", "LECLERC", "NORRIS"]);
   const ecuries = trierParPoints(ECURIES);
   egal(ecuries[0].nom, "Red Bull");
   egal(ecuries[0].points, 139);
