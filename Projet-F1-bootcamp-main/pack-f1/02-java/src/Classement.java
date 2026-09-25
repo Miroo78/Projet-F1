@@ -28,9 +28,59 @@ public class Classement {
     //    ses victoires (position 1) et ses 2e places, trié par :
     //    points décroissants, puis victoires, puis 2e places, puis nom (A→Z).
     public static List<Resultat> classementPilotes(List<Ligne> lignes) {
-        // À COMPLÉTER
-        return null;
+    List<Resultat> resultats = new java.util.ArrayList<>();
+
+    for (Ligne ligne : lignes) {
+
+        Resultat resultat = null;
+
+        // On cherche si le pilote existe déjà
+        for (Resultat r : resultats) {
+            if (r.nom.equals(ligne.pilote())) {
+                resultat = r;
+                break;
+            }
+        }
+
+        // Si le pilote n'existe pas encore, on le crée
+        if (resultat == null) {
+            resultat = new Resultat(ligne.pilote(), ligne.ecurie());
+            resultats.add(resultat);
+        }
+
+        // Ajout des points
+        resultat.points += pointsPourPosition(ligne.position());
+
+        // Victoire
+        if (ligne.position() == 1) {
+            resultat.victoires++;
+        }
+
+        // Deuxième place
+        if (ligne.position() == 2) {
+            resultat.deuxiemes++;
+        }
     }
+
+    // Tri : points → victoires → 2e places → nom
+    resultats.sort((a, b) -> {
+        if (a.points != b.points) {
+            return Integer.compare(b.points, a.points);
+        }
+
+        if (a.victoires != b.victoires) {
+            return Integer.compare(b.victoires, a.victoires);
+        }
+
+        if (a.deuxiemes != b.deuxiemes) {
+            return Integer.compare(b.deuxiemes, a.deuxiemes);
+        }
+
+        return a.nom.compareTo(b.nom);
+    });
+
+    return resultats;
+}
 
     // 3. classementEcuries(pilotes) : additionne les points, victoires et
     //    2e places des pilotes de chaque écurie. Même ordre de tri.
