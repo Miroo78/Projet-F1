@@ -58,8 +58,23 @@ function remplirTableau(idCorps, liste) {
 }
 // 3. marquerPodium(idCorps) : ajoute la classe CSS "podium" aux TROIS PREMIÈRES
 //    lignes du tableau, et la retire de toutes les autres.
-function marquerPodium(idCorps) {
-  // À COMPLÉTER
+function marquerPodium(idCorps) { // 
+  const corps = document.getElementById(idCorps);
+  const lignes = corps.querySelectorAll("tr");
+
+  lignes.forEach((ligne, index) => { // Parcours de toutes les li,es du tableaau
+    ligne.classList.remove("podium");
+
+    if (index < 3) { // Si c'est unn des 3 lignes 
+      ligne.classList.add("podium");// ajt podium
+    }// Sinon on ne fait rien
+    // ajouter la classe "intermediaire" aux lignes 4 à 6 (index 3 à 5)
+    if (index >= 3 && index < 6) {
+      ligne.classList.add("intermediaire");
+    } else {
+      ligne.classList.remove("intermediaire");
+    }
+  });
 }
 
 /* --- FOURNI — NE PAS MODIFIER : affichage de la saison ------------------- */

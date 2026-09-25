@@ -14,3 +14,5 @@ formateur/                   corrigés, grille, générateur — À RETIRER avan
 ```
 
 Prérequis : Python 3 avec Jupyter, un JDK (`javac -version`), un navigateur.
+
+# README DU RENDU : 
